@@ -1,0 +1,6 @@
+{
+  "name": "SatuHari",
+  "description": "SatuHari adalah workspace kolaboratif untuk pasangan Indonesia merencanakan pernikahan bersama, mengelola checklist, anggaran, vendor, tamu, rundown, hingga seserahan secara praktis dalam satu tempat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
