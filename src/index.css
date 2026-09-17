@@ -2,14 +2,40 @@
 @import "tailwindcss";
 
 @theme {
-  --color-natural-cream: #FDFBF7;
-  --color-natural-beige: #F5F2ED;
-  --color-natural-sand: #E8E2D9;
-  --color-natural-sage: #6B705C;
-  --color-natural-olive: #A5A58D;
-  --color-natural-terracotta: #CB997E;
-  --color-natural-dark: #2D312E;
-  --color-natural-text: #4A4A4A;
+  /* Clever Chameleon Botanical Calla Lily Palette */
+  --color-calla-porcelain: #F7F1F0;     /* Swatch 1: Chalk porcelain canvas */
+  --color-calla-blush: #ECC3D3;         /* Swatch 2: Soft petal pink */
+  --color-calla-rose: #D68B97;          /* Swatch 3: Dusty rose */
+  --color-calla-crimson: #BA3444;       /* Swatch 4: Rich berry rose / calla lily */
+  --color-calla-leaf: #487A64;          /* Swatch 5: Foliage eucalyptus green */
+  --color-calla-pine: #1C3E33;          /* Swatch 6: Deep pine evergreen (PRIMARY) */
+  --color-calla-dark: #0D1C17;          /* Swatch 7: Night forest charcoal */
+
+  /* Primary Brand Tokens */
+  --color-primary: #1C3E33;
+  --color-primary-hover: #142F26;
+  --color-accent-crimson: #BA3444;
+  --color-accent-rose: #D68B97;
+  --color-accent-pink: #ECC3D3;
+  --color-accent-leaf: #487A64;
+  
+  --color-canvas: #F7F1F0;
+  --color-surface: #FFFFFF;
+  --color-sidebar: #F2E9E8;
+  --color-border: #E8DDD9;
+  --color-muted: #788A82;
+  --color-heading: #0D1C17;
+  --color-body: #2D3D36;
+
+  /* Backward-compatible utility aliases mapped to the new palette */
+  --color-natural-cream: #F7F1F0;
+  --color-natural-beige: #F2E9E8;
+  --color-natural-sand: #E8DDD9;
+  --color-natural-sage: #1C3E33;
+  --color-natural-olive: #788A82;
+  --color-natural-terracotta: #BA3444;
+  --color-natural-dark: #0D1C17;
+  --color-natural-text: #2D3D36;
 
   --font-sans: "Inter", "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
@@ -17,7 +43,7 @@
 
 @layer base {
   body {
-    background-color: var(--color-natural-cream);
-    color: var(--color-natural-text);
+    background-color: var(--color-canvas);
+    color: var(--color-body);
   }
 }

@@ -274,7 +274,7 @@ export const DEMO_VENDORS: VendorItem[] = [
       status: 'Received',
       attachmentUrl: '#'
     },
-    paymentSchedule: 'DP 1: Rp 20jt, DP 2: Rp 30jt, Pelunasan Rp 55jt di H-45',
+    paymentSchedule: 'DP 1: Rp 20.000.000, DP 2: Rp 30.000.000, Pelunasan Rp 55.000.000 di H-45',
     notes: 'Kapasitas s.d 800 tamu berdiri. Parkir luas & aman.',
     status: 'Booked',
     isDeleted: false,
@@ -340,7 +340,7 @@ export const DEMO_VENDORS: VendorItem[] = [
       status: 'Received',
       attachmentUrl: '#'
     },
-    paymentSchedule: 'DP Rp 10jt, Sisa Rp 15jt paska acara',
+    paymentSchedule: 'DP Rp 10.000.000, Sisa Rp 15.000.000 paska acara',
     notes: 'WO On-the-Day dengan crew berjumlah 12 orang.',
     status: 'Booked',
     isDeleted: false,

@@ -194,23 +194,23 @@ export default function GuestView({
       {/* Title Header Row */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Daftar Tamu Undangan (Tamu)</h2>
-          <p className="text-sm text-stone-500">Kalkulasi total katering pack, saring kategori hubungan, dan petakan nomor meja resepsi.</p>
+          <h2 className="text-2xl font-bold tracking-tight text-[#0D1C17]">Daftar Tamu Undangan (Tamu)</h2>
+          <p className="text-sm text-[#788A82]">Kalkulasi total katering pack, saring kategori hubungan, dan petakan nomor meja resepsi.</p>
         </div>
         
         <div className="flex flex-wrap gap-2 self-start md:self-auto">
           <button
             id="btn-open-import-modal"
             onClick={() => setShowImportModal(true)}
-            className="px-3.5 py-2 border border-zinc-200 hover:border-amber-700 bg-white hover:bg-amber-50/10 text-stone-700 rounded-lg text-xs font-bold flex items-center transition cursor-pointer"
+            className="px-3.5 py-2 border border-[#E8DDD9] hover:border-[#1C3E33] bg-white hover:bg-[#FAF5F5] text-[#0D1C17] rounded-xl text-xs font-bold flex items-center transition cursor-pointer shadow-2xs"
           >
-            <Upload className="w-3.5 h-3.5 mr-1.5" />
+            <Upload className="w-3.5 h-3.5 mr-1.5 text-[#1C3E33]" />
             Impor Massal (CSV)
           </button>
           <button
             id="btn-open-add-guest-modal"
             onClick={() => setShowAddModal(true)}
-            className="px-4 py-2 bg-amber-700 hover:bg-amber-800 text-stone-50 rounded-lg text-xs font-bold flex items-center shadow-sm transition cursor-pointer"
+            className="px-4 py-2 bg-[#1C3E33] hover:bg-[#142F26] text-[#F7F1F0] rounded-xl text-xs font-bold flex items-center shadow-xs transition cursor-pointer border-0"
           >
             <Plus className="w-4 h-4 mr-1.5" />
             Tambah Tamu
@@ -220,47 +220,47 @@ export default function GuestView({
 
       {/* METRICS SUMMARY ROW */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-xl border border-stone-200/70 shadow-xs">
-          <span className="text-[10px] uppercase font-bold text-zinc-400 block font-mono pl-0.5">Tamu Terdaftar</span>
-          <span className="text-lg md:text-xl font-extrabold text-stone-900 block mt-1">{totalPaxCount} Orang</span>
-          <span className="text-[10px] text-zinc-500">Dari {totalGuestsEntries} Grup Undangan</span>
+        <div className="bg-white p-4 rounded-2xl border border-[#E8DDD9] shadow-xs">
+          <span className="text-[10px] uppercase font-bold text-[#788A82] block font-mono pl-0.5">Tamu Terdaftar</span>
+          <span className="text-lg md:text-xl font-extrabold text-[#0D1C17] block mt-1">{totalPaxCount} Orang</span>
+          <span className="text-[10px] text-[#788A82]">Dari {totalGuestsEntries} Grup Undangan</span>
         </div>
 
-        <div className="bg-white p-4 rounded-xl border border-stone-200/70 shadow-xs">
-          <span className="text-[10px] uppercase font-bold text-zinc-400 block font-mono pl-0.5">Undangan Terkirim</span>
-          <span className="text-lg md:text-xl font-extrabold text-stone-900 block mt-1">{invitationsSentCount} Undangan</span>
-          <span className="text-[10px] text-zinc-500">Status Bukan 'Belum Diundang'</span>
+        <div className="bg-white p-4 rounded-2xl border border-[#E8DDD9] shadow-xs">
+          <span className="text-[10px] uppercase font-bold text-[#788A82] block font-mono pl-0.5">Undangan Terkirim</span>
+          <span className="text-lg md:text-xl font-extrabold text-[#0D1C17] block mt-1">{invitationsSentCount} Undangan</span>
+          <span className="text-[10px] text-[#788A82]">Status Bukan 'Belum Diundang'</span>
         </div>
 
-        <div className="bg-white p-4 rounded-xl border border-stone-200/70 shadow-xs">
+        <div className="bg-white p-4 rounded-2xl border border-[#E8DDD9] shadow-xs">
           <span className="text-[10px] uppercase font-bold text-emerald-800 block font-mono pl-0.5">Kehadiran (Konfirmasi)</span>
           <span className="text-lg md:text-xl font-extrabold text-emerald-950 block mt-1">{attendanceCount} Tamu (Pax)</span>
           <span className="text-[10px] text-emerald-700 font-medium">Status 'Confirmed' / 'Attended'</span>
         </div>
 
-        <div className="bg-white p-4 rounded-xl border border-stone-200/70 shadow-xs">
-          <span className="text-[10px] uppercase font-bold text-amber-900 block font-mono pl-0.5 font-bold">Rasio Kehadiran</span>
-          <span className="text-lg md:text-xl font-extrabold text-amber-950 block mt-1">
+        <div className="bg-white p-4 rounded-2xl border border-[#E8DDD9] shadow-xs">
+          <span className="text-[10px] uppercase font-bold text-[#1C3E33] block font-mono pl-0.5 font-bold">Rasio Kehadiran</span>
+          <span className="text-lg md:text-xl font-extrabold text-[#1C3E33] block mt-1">
             {rsvpReceivedCount > 0 ? Math.round((attendanceCount / rsvpReceivedCount) * 100) : 0}% Rasa
           </span>
-          <span className="text-[10px] text-zinc-500">Dari total RSVP masuk</span>
+          <span className="text-[10px] text-[#788A82]">Dari total RSVP masuk</span>
         </div>
       </div>
 
       {/* SEARCH & FILTERS BAR */}
-      <div className="bg-white p-4 rounded-xl border border-stone-200/70 shadow-xs space-y-3">
+      <div className="bg-white p-4 rounded-xl border border-[#E8DDD9] shadow-xs space-y-3">
         <div className="flex flex-col md:flex-row gap-3">
           
           {/* Guest Name Search */}
           <div className="relative flex-grow">
-            <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-[#788A82] absolute left-3 top-3" />
             <input
               id="search-guests-input"
               type="text"
               placeholder="Cari nama keluarga, teman, instansi, alamat..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-amber-500/10 focus:border-amber-600 bg-stone-50"
+              className="w-full pl-9 pr-4 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#1C3E33]/20 focus:border-[#1C3E33] bg-[#FAF5F5] text-[#0D1C17]"
             />
           </div>
 
@@ -269,7 +269,7 @@ export default function GuestView({
             id="filter-guest-side"
             value={filterSide}
             onChange={(e) => setFilterSide(e.target.value as any)}
-            className="px-3 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-amber-600 bg-white cursor-pointer font-semibold text-zinc-700"
+            className="px-3 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:border-[#1C3E33] bg-white cursor-pointer font-bold text-[#0D1C17]"
           >
             <option value="ALL">Semua Pihak Keluarga</option>
             <option value="Bride">Mempelai Wanita (Bride)</option>
@@ -282,7 +282,7 @@ export default function GuestView({
             id="filter-guest-category"
             value={filterCat}
             onChange={(e) => setFilterCat(e.target.value as any)}
-            className="px-3 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-amber-600 bg-white cursor-pointer font-semibold text-zinc-700"
+            className="px-3 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:border-[#1C3E33] bg-white cursor-pointer font-bold text-[#0D1C17]"
           >
             <option value="ALL">Semua Kategori Kekerabatan</option>
             {categories.map(c => <option key={c} value={c}>{c}</option>)}
@@ -293,7 +293,7 @@ export default function GuestView({
             id="filter-guest-rsvp"
             value={filterRSVP}
             onChange={(e) => setFilterRSVP(e.target.value as any)}
-            className="px-3 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-amber-600 bg-white cursor-pointer font-semibold text-zinc-700"
+            className="px-3 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:border-[#1C3E33] bg-white cursor-pointer font-bold text-[#0D1C17]"
           >
             <option value="ALL">Semua Status RSVP</option>
             {rsvpStatuses.map(status => <option key={status} value={status}>{status}</option>)}
@@ -304,18 +304,18 @@ export default function GuestView({
 
       {/* GUESTS LIST DATABASE TABLE */}
       {filteredGuests.length === 0 ? (
-        <div className="bg-white rounded-xl border border-stone-200/60 p-12 text-center max-w-xl mx-auto space-y-3">
-          <div className="w-12 h-12 rounded-full bg-stone-50 flex items-center justify-center mx-auto text-stone-400">
+        <div className="bg-white rounded-xl border border-[#E8DDD9] p-12 text-center max-w-xl mx-auto space-y-3">
+          <div className="w-12 h-12 rounded-full bg-[#FAF5F5] flex items-center justify-center mx-auto text-[#788A82]">
             <Users className="w-6 h-6 stroke-1" />
           </div>
-          <p className="text-sm font-semibold text-stone-700">"No guests yet. Start building your guest list."</p>
-          <p className="text-xs text-stone-400">Impor data massal CSV atau tambahkan rekan kerja, silsilah keluarga, sahabat masa kecil, pengurus kelurahan.</p>
+          <p className="text-sm font-semibold text-[#0D1C17]">"No guests yet. Start building your guest list."</p>
+          <p className="text-xs text-[#788A82]">Impor data massal CSV atau tambahkan rekan kerja, silsilah keluarga, sahabat masa kecil, pengurus kelurahan.</p>
         </div>
       ) : (
-        <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden shadow-xs">
+        <div className="bg-white border border-[#E8DDD9] rounded-2xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
-              <thead className="bg-[#FAF9F5] border-b border-stone-200 text-zinc-600 uppercase font-mono tracking-wider font-extrabold">
+              <thead className="bg-[#F2E9E8] border-b border-[#E8DDD9] text-[#2D3D36] uppercase font-mono tracking-wider font-extrabold">
                 <tr>
                   <th className="p-4">Nama Tamu & Kategori</th>
                   <th className="p-4 text-center">Pihak Kelg</th>
@@ -326,16 +326,16 @@ export default function GuestView({
                   <th className="p-4 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-100 font-medium text-stone-700">
+              <tbody className="divide-y divide-[#E8DDD9]/60 font-medium text-[#2D3D36]">
                 {filteredGuests.map((guest) => (
-                  <tr key={guest.id} className="hover:bg-amber-50/15 transition">
+                  <tr key={guest.id} className="hover:bg-[#FAF5F5]/60 transition">
                     <td className="p-4">
-                      <span className="font-bold text-stone-905 text-stone-900 block">{guest.name}</span>
-                      <span className="text-[10px] text-zinc-400 font-semibold uppercase font-mono tracking-wider pt-0.5 block">{guest.category}</span>
+                      <span className="font-bold text-[#0D1C17] block">{guest.name}</span>
+                      <span className="text-[10px] text-[#788A82] font-semibold uppercase font-mono tracking-wider pt-0.5 block">{guest.category}</span>
                     </td>
 
                     <td className="p-4 text-center">
-                      <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${guest.side === 'Bride' ? 'bg-pink-100 text-pink-700' : guest.side === 'Groom' ? 'bg-indigo-100 text-indigo-700' : 'bg-amber-100 text-amber-800'}`}>
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${guest.side === 'Bride' ? 'bg-[#BA3444]/15 text-[#BA3444]' : guest.side === 'Groom' ? 'bg-[#1C3E33]/15 text-[#1C3E33]' : 'bg-[#487A64]/15 text-[#487A64]'}`}>
                         {guest.side === 'Bride' ? 'Wanita' : guest.side === 'Groom' ? 'Pria' : 'Dua Sisi'}
                       </span>
                     </td>
@@ -347,37 +347,45 @@ export default function GuestView({
                         min="1"
                         value={guest.pax}
                         onChange={(e) => onUpdateGuest(guest.id, { pax: parseInt(e.target.value) || 0 })}
-                        className="w-12 p-1 border border-zinc-150 rounded text-center bg-stone-50"
+                        className="w-12 p-1 border border-[#E8DDD9] rounded-lg text-center bg-[#FAF5F5] text-[#0D1C17]"
                       />
                     </td>
 
-                    <td className="p-4 text-zinc-500 max-w-44 truncate" title={guest.address}>
+                    <td className="p-4 text-[#788A82] max-w-44 truncate" title={guest.address}>
                       {guest.address || '-'}
                     </td>
 
-                    <td className="p-4 text-center font-bold font-mono text-stone-900">
+                    <td className="p-4 text-center font-bold font-mono text-[#0D1C17]">
                       <input
                         id={`input-table-${guest.id}`}
                         type="text"
                         value={guest.tableNumber}
                         onChange={(e) => onUpdateGuest(guest.id, { tableNumber: e.target.value })}
-                        className="w-14 p-1 border border-zinc-150 rounded text-center bg-stone-50"
+                        className="w-14 p-1 border border-[#E8DDD9] rounded-lg text-center bg-[#FAF5F5] text-[#0D1C17]"
                       />
                     </td>
 
                     <td className="p-4">
-                      {/* Interactive RSVP Changer */}
+                      {/* Interactive RSVP Changer keeping semantic system: Confirmed/Attended=Green, Invited=Blue, Declined=Red */}
                       <select
                         id={`select-rsvp-status-${guest.id}`}
                         value={guest.rsvpStatus}
                         onChange={(e) => onUpdateGuest(guest.id, { rsvpStatus: e.target.value as RSVPStatus })}
-                        className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold cursor-pointer focus:outline-none uppercase-label ${guest.rsvpStatus === 'Confirmed' ? 'bg-emerald-100 text-emerald-800' : guest.rsvpStatus === 'Invited' ? 'bg-blue-100 text-blue-800' : guest.rsvpStatus === 'Declined' ? 'bg-red-50 text-red-800' : 'bg-stone-100 text-stone-700'}`}
+                        className={`px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold cursor-pointer focus:outline-none uppercase border ${
+                          guest.rsvpStatus === 'Confirmed' || guest.rsvpStatus === 'Attended' 
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-200' 
+                            : guest.rsvpStatus === 'Invited' 
+                            ? 'bg-blue-50 text-blue-800 border-blue-200' 
+                            : guest.rsvpStatus === 'Declined' 
+                            ? 'bg-red-50 text-red-800 border-red-200' 
+                            : 'bg-stone-100 text-stone-700 border-stone-200'
+                        }`}
                       >
                         <option value="Not Invited">BELUM DIUNDANG</option>
-                        <option value="Invited">TELAH DIUNDANG</option>
-                        <option value="Confirmed">KONFIRMASI HADIR</option>
-                        <option value="Declined">TIDAK HADIR</option>
-                        <option value="Attended">TELAH DATANG (Acara)</option>
+                        <option value="Invited">TELAH DIUNDANG (INFO)</option>
+                        <option value="Confirmed">KONFIRMASI HADIR (SUCCESS)</option>
+                        <option value="Declined">TIDAK HADIR (DANGER)</option>
+                        <option value="Attended">TELAH DATANG (SUCCESS)</option>
                       </select>
                     </td>
 
@@ -385,7 +393,7 @@ export default function GuestView({
                       <button
                         id={`btn-delete-guest-${guest.id}`}
                         onClick={() => onDeleteGuest(guest.id)}
-                        className="p-1 px-1.5 text-zinc-400 hover:text-red-650 rounded hover:bg-red-50 transition"
+                        className="p-1 px-1.5 text-zinc-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition cursor-pointer border-0"
                         title="Hapus Tamu"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -401,12 +409,12 @@ export default function GuestView({
 
       {/* ADD NEW GUEST MODAL POPUP */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 border border-stone-200">
-            <h3 className="text-lg font-bold text-stone-900 mb-1">Tambah Tamu Undangan</h3>
-            <p className="text-xs text-stone-500 mb-4">Pastikan PIC dan penggolongan porsi katering sudah sinkron.</p>
+        <div className="fixed inset-0 bg-[#0D1C17]/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl shadow-xl w-full max-w-md p-6 border border-[#E8DDD9] relative overflow-hidden">
+            <h3 className="text-lg font-bold text-[#0D1C17] mb-1">Tambah Tamu Undangan</h3>
+            <p className="text-xs text-[#788A82] mb-4">Pastikan PIC dan penggolongan porsi katering sudah sinkron.</p>
 
-            <form onSubmit={handleAddNewGuest} className="space-y-3 text-xs font-semibold text-stone-700">
+            <form onSubmit={handleAddNewGuest} className="space-y-3 text-xs font-semibold text-[#0D1C17]">
               <div>
                 <label className="block mb-1">Nama Tamu / Keluarga / Instansi *</label>
                 <input
@@ -415,7 +423,7 @@ export default function GuestView({
                   placeholder="Contoh: Pak Haris Setyo & Istri..."
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
-                  className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none"
+                  className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none focus:ring-2 focus:ring-[#1C3E33]/20 focus:border-[#1C3E33]"
                 />
               </div>
 
@@ -425,7 +433,7 @@ export default function GuestView({
                   <select
                     value={newCat}
                     onChange={(e) => setNewCat(e.target.value as GuestCategory)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-white focus:outline-none font-medium text-stone-800"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-white focus:outline-none font-bold text-[#0D1C17]"
                   >
                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
@@ -435,7 +443,7 @@ export default function GuestView({
                   <select
                     value={newSide}
                     onChange={(e) => setNewSide(e.target.value as GuestSide)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-white focus:outline-none font-medium text-stone-800"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-white focus:outline-none font-bold text-[#0D1C17]"
                   >
                     <option value="Both">Pihak Berdua (Both)</option>
                     <option value="Bride">Mempelai Wanita (Bride)</option>
@@ -452,7 +460,7 @@ export default function GuestView({
                     placeholder="Contoh: 0812XXXXXXXX"
                     value={newPhone}
                     onChange={(e) => setNewPhone(e.target.value)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none font-mono"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none font-mono"
                   />
                 </div>
                 <div>
@@ -463,7 +471,7 @@ export default function GuestView({
                     required
                     value={newPax}
                     onChange={(e) => setNewPax(parseInt(e.target.value) || 0)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none font-mono"
                   />
                 </div>
               </div>
@@ -474,7 +482,7 @@ export default function GuestView({
                   <select
                     value={newRSVP}
                     onChange={(e) => setNewRSVP(e.target.value as RSVPStatus)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-white focus:outline-none font-medium text-stone-800"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-white focus:outline-none font-bold text-[#0D1C17]"
                   >
                     <option value="Not Invited">Belum Diundang</option>
                     <option value="Invited">Telah Diundang</option>
@@ -489,7 +497,7 @@ export default function GuestView({
                     placeholder="Contoh: A4 / VIP"
                     value={newTable}
                     onChange={(e) => setNewTable(e.target.value)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none"
                   />
                 </div>
               </div>
@@ -501,7 +509,7 @@ export default function GuestView({
                   placeholder="Contoh: Bandung Barat / Pancoran Mas Depok"
                   value={newAddress}
                   onChange={(e) => setNewAddress(e.target.value)}
-                  className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none"
+                  className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none"
                 />
               </div>
 
@@ -512,22 +520,22 @@ export default function GuestView({
                   placeholder="Sepupu jauh dari pihak bude solo, bawa anak kecil..."
                   value={newNotes}
                   onChange={(e) => setNewNotes(e.target.value)}
-                  className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none font-medium"
+                  className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none font-medium"
                 />
               </div>
 
-              <div className="flex space-x-2 pt-4 border-t border-zinc-100 text-xs font-semibold">
+              <div className="flex space-x-2 pt-4 border-t border-[#E8DDD9] text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="flex-1 py-1.5 border border-zinc-200 hover:bg-stone-50 rounded-lg text-stone-600 transition"
+                  className="flex-1 py-2.5 border border-[#E8DDD9] hover:bg-[#FAF5F5] rounded-xl text-[#0D1C17] transition cursor-pointer bg-white"
                 >
                   Kembali
                 </button>
                 <button
                   id="btn-confirm-add-guest"
                   type="submit"
-                  className="flex-1 py-1.5 bg-amber-700 hover:bg-amber-800 text-white rounded-lg transition"
+                  className="flex-1 py-2.5 bg-[#1C3E33] hover:bg-[#142F26] text-[#F7F1F0] rounded-xl transition cursor-pointer border-0 shadow-xs"
                 >
                   Tambahkan Tamu
                 </button>
@@ -539,62 +547,62 @@ export default function GuestView({
 
       {/* BULK IMPORT MODAL POPUP */}
       {showImportModal && (
-        <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 border border-stone-200">
+        <div className="fixed inset-0 bg-[#0D1C17]/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl shadow-xl w-full max-w-lg p-6 border border-[#E8DDD9] relative overflow-hidden">
             
             <div className="flex items-center space-x-2 mb-2">
-              <ClipboardList className="w-5 h-5 text-amber-700" />
-              <h3 className="text-base font-extrabold text-stone-900">Simulator Impor Tamu (CSV Text)</h3>
+              <ClipboardList className="w-5 h-5 text-[#1C3E33]" />
+              <h3 className="text-base font-extrabold text-[#0D1C17]">Simulator Impor Tamu (CSV Text)</h3>
             </div>
             
-            <p className="text-xs text-stone-500 mb-4 leading-relaxed">
+            <p className="text-xs text-[#788A82] mb-4 leading-relaxed">
               Ketik atau tempel draf nama kawan/keluarga dari spreadsheet dengan format koma <strong>(CSV)</strong> di bawah ini untuk mengimpor massal instan.
             </p>
 
             {/* QUICK PRESET GENERATORS */}
-            <div className="flex gap-2.5 mb-3.5">
-              <span className="text-[10px] uppercase font-bold text-stone-400 self-center">Contoh Preset:</span>
+            <div className="flex flex-wrap gap-2 mb-3.5">
+              <span className="text-[10px] uppercase font-bold text-[#788A82] self-center">Contoh Preset:</span>
               <button
                 type="button"
                 onClick={() => loadPresetCSV('office')}
-                className="px-2 py-1 bg-zinc-100 hover:bg-amber-100 text-[10px] text-stone-700 rounded transition outline-none"
+                className="px-2.5 py-1 bg-[#FAF5F5] hover:bg-[#F2E9E8] border border-[#E8DDD9] text-[10px] font-bold text-[#0D1C17] rounded-lg transition cursor-pointer"
               >
                 💼 Rekan Kantor
               </button>
               <button
                 type="button"
                 onClick={() => loadPresetCSV('college')}
-                className="px-2 py-1 bg-zinc-100 hover:bg-amber-100 text-[10px] text-stone-700 rounded transition outline-none"
+                className="px-2.5 py-1 bg-[#FAF5F5] hover:bg-[#F2E9E8] border border-[#E8DDD9] text-[10px] font-bold text-[#0D1C17] rounded-lg transition cursor-pointer"
               >
                 🏫 Teman Kuliah
               </button>
               <button
                 type="button"
                 onClick={() => loadPresetCSV('big_family')}
-                className="px-2 py-1 bg-zinc-100 hover:bg-amber-100 text-[10px] text-stone-700 rounded transition"
+                className="px-2.5 py-1 bg-[#FAF5F5] hover:bg-[#F2E9E8] border border-[#E8DDD9] text-[10px] font-bold text-[#0D1C17] rounded-lg transition cursor-pointer"
               >
                 ❤️ Keluarga Besar
               </button>
             </div>
 
-            <div className="space-y-3.5 text-xs text-stone-700 font-semibold">
+            <div className="space-y-3.5 text-xs text-[#0D1C17] font-semibold">
               <textarea
                 rows={6}
                 value={importText}
                 onChange={(e) => setImportText(e.target.value)}
-                className="w-full p-2.5 border border-zinc-200 rounded-lg text-[11px] font-mono bg-stone-50 focus:outline-none"
+                className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-[11px] font-mono bg-[#FAF5F5] focus:outline-none focus:ring-2 focus:ring-[#1C3E33]/20 focus:border-[#1C3E33]"
               />
               
-              <div className="text-[10px] text-zinc-500 bg-amber-50 p-2.5 rounded-lg border border-amber-100/50 leading-relaxed font-mono">
+              <div className="text-[10px] text-[#2D3D36] bg-[#FAF5F5] p-2.5 rounded-xl border border-[#E8DDD9] leading-relaxed font-mono">
                 Aturan Kolom: <br />
-                <span className="font-bold text-amber-950">Nama,Kategori,Pihak(Bride/Groom/Both),Handphone,Kota,Pax(Angka),RSVPStatus,NomorMeja</span>
+                <span className="font-bold text-[#1C3E33]">Nama,Kategori,Pihak(Bride/Groom/Both),Handphone,Kota,Pax(Angka),RSVPStatus,NomorMeja</span>
               </div>
 
-              <div className="flex space-x-2 pt-4 border-t border-zinc-100 text-xs font-semibold">
+              <div className="flex space-x-2 pt-4 border-t border-[#E8DDD9] text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => setShowImportModal(false)}
-                  className="flex-1 py-1.5 border border-zinc-200 hover:bg-stone-50 rounded-lg text-stone-600 transition"
+                  className="flex-1 py-2.5 border border-[#E8DDD9] hover:bg-[#FAF5F5] rounded-xl text-[#0D1C17] transition cursor-pointer bg-white"
                 >
                   Kembali
                 </button>
@@ -602,7 +610,7 @@ export default function GuestView({
                   id="btn-confirm-import-guests"
                   type="button"
                   onClick={handleBulkImport}
-                  className="flex-1 py-1.5 bg-amber-700 hover:bg-amber-800 text-white rounded-lg transition font-bold"
+                  className="flex-1 py-2.5 bg-[#1C3E33] hover:bg-[#142F26] text-[#F7F1F0] rounded-xl transition font-bold cursor-pointer border-0 shadow-xs"
                 >
                   Impor {importText.split('\n').filter(l => l.trim()).length} Tamu Massal
                 </button>

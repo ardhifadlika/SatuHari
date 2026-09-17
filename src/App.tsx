@@ -15,6 +15,9 @@ import {
   ActivityLog, 
   SharedAttachment 
 } from './types';
+import { Language, translations } from './data/translations';
+import { LogOut } from 'lucide-react';
+import { formatRupiah } from './utils/currency';
 
 // Templates/Presets Data
 import { 
@@ -48,6 +51,21 @@ export default function App() {
     const saved = localStorage.getItem('satuhari_workspace');
     return saved ? JSON.parse(saved) : null;
   });
+
+  // Language state (Indonesian & English)
+  const [lang, setLang] = useState<Language>(() => {
+    return (localStorage.getItem('satuhari_lang') as Language) || 'id';
+  });
+
+  const handleToggleLang = (newLang: Language) => {
+    setLang(newLang);
+    localStorage.setItem('satuhari_lang', newLang);
+  };
+
+  const t = translations[lang];
+
+  // In-app modal state for exiting demo mode (reliably works in iframe!)
+  const [showExitDemoModal, setShowExitDemoModal] = useState(false);
 
   // Navigation tab
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
@@ -111,11 +129,17 @@ export default function App() {
     }
   }, [tasks, budgets, vendors, guests, rundowns, seserahans, activityLogs, attachments, workspace]);
 
-  // Handle saving role switch
-  const handleToggleUser = () => {
-    const nextUser = currentUser === 'Ami' ? 'Ardhi' : 'Ami';
+  // Handle saving role switch (optionally specifying exact user)
+  const handleToggleUser = (targetUser?: 'Ami' | 'Ardhi') => {
+    const nextUser = targetUser || (currentUser === 'Ami' ? 'Ardhi' : 'Ami');
     setCurrentUser(nextUser);
     localStorage.setItem('satuhari_user', nextUser);
+  };
+
+  // Exit demo handler
+  const handleExitDemo = () => {
+    setWorkspace(null);
+    setShowExitDemoModal(false);
   };
 
   // Triggering new Log record helper
@@ -244,7 +268,7 @@ export default function App() {
       deletedAt: null
     };
     setBudgets(prev => [budget, ...prev]);
-    triggerLog(`menambahkan anggaran ${budget.category}: "${budget.vendor}" sebesar Rp ${budget.budgetAmount.toLocaleString('id-ID')}`);
+    triggerLog(`menambahkan anggaran ${budget.category}: "${budget.vendor}" sebesar ${formatRupiah(budget.budgetAmount)}`);
   };
 
   const handleUpdateBudgetItem = (id: string, updates: Partial<BudgetItem>) => {
@@ -618,6 +642,8 @@ export default function App() {
       <Onboarding
         onSelectGuestMode={handleSelectDemoMode}
         onCreateWorkspace={handleCreateWorkspace}
+        lang={lang}
+        onToggleLang={handleToggleLang}
       />
     );
   }
@@ -630,6 +656,8 @@ export default function App() {
         onCreateWorkspace={handleCreateWorkspace}
         pendingWorkspace={workspace}
         onSimulateJoin={handleSimulatePartnerJoin}
+        lang={lang}
+        onToggleLang={handleToggleLang}
       />
     );
   }
@@ -644,7 +672,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-[#4A4A4A] font-sans flex flex-col lg:flex-row relative">
+    <div className="min-h-screen bg-[#F7F1F0] text-[#2D3D36] font-sans flex flex-col lg:flex-row relative">
       
       {/* Sidebar navigation */}
       <Sidebar
@@ -656,6 +684,9 @@ export default function App() {
         deletedCounts={deletedCounts}
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}
+        lang={lang}
+        onToggleLang={handleToggleLang}
+        onOpenExitDemoModal={() => setShowExitDemoModal(true)}
       />
 
       {/* Main workspace arena */}
@@ -664,20 +695,18 @@ export default function App() {
           
           {/* Header warning for Demo/Guest mode reset simulation */}
           {workspace.isDemo && (
-            <div className="p-3 bg-[#F5F2ED] rounded-xl border border-[#E8E2D9] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[#2D312E] no-print">
+            <div className="p-3 bg-[#F2E9E8] rounded-2xl border border-[#E8DDD9] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[#0D1C17] no-print shadow-xs">
               <span className="font-semibold">
-                ✨ Anda sedang menjelajahi <strong>Workspace Demo (Ami & Ardhi)</strong> dengan data terisi lengkap untuk uji coba.
+                ✨ {t.demoBannerText} ({workspace.partnerAName} & {workspace.partnerBName})
               </span>
               <button
                 id="btn-quit-demo"
-                onClick={() => {
-                  if (window.confirm('Keluar dari mode demo dan kembali ke layar sambutan?')) {
-                    setWorkspace(null);
-                  }
-                }}
-                className="px-3.5 py-1.5 bg-[#6B705C] hover:bg-[#5C614E] text-[#FDFBF7] font-bold rounded-lg transition"
+                type="button"
+                onClick={() => setShowExitDemoModal(true)}
+                className="px-3.5 py-1.5 bg-[#1C3E33] hover:bg-[#142F26] text-[#F7F1F0] font-bold rounded-xl transition cursor-pointer border-0 shadow-xs flex items-center shrink-0"
               >
-                Keluar Demo
+                <LogOut className="w-3.5 h-3.5 mr-1.5" />
+                {t.exitDemoBtn}
               </button>
             </div>
           )}
@@ -689,6 +718,42 @@ export default function App() {
           
         </div>
       </main>
+
+      {/* IN-APP EXIT DEMO CONFIRMATION MODAL (Bypasses browser iframe window.confirm block) */}
+      {showExitDemoModal && (
+        <div 
+          id="modal-exit-demo"
+          className="fixed inset-0 bg-[#0D1C17]/40 backdrop-blur-xs flex items-center justify-center p-4 z-50"
+        >
+          <div className="bg-white rounded-3xl shadow-xl w-full max-w-md p-6 border border-[#E8DDD9] space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center">
+              <LogOut className="w-6 h-6 stroke-1.5" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-[#0D1C17]">{t.exitDemoModalTitle}</h3>
+              <p className="text-xs text-[#788A82] mt-1.5 leading-relaxed">{t.exitDemoModalDesc}</p>
+            </div>
+            <div className="flex space-x-2 pt-2 border-t border-[#E8DDD9]">
+              <button
+                id="btn-cancel-exit-demo"
+                type="button"
+                onClick={() => setShowExitDemoModal(false)}
+                className="flex-1 py-2.5 border border-[#E8DDD9] hover:bg-[#FAF5F5] rounded-xl text-xs font-semibold text-[#0D1C17] transition cursor-pointer bg-white"
+              >
+                {t.cancelBtn}
+              </button>
+              <button
+                id="btn-confirm-exit-demo"
+                type="button"
+                onClick={handleExitDemo}
+                className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-semibold transition cursor-pointer border-0 shadow-xs"
+              >
+                {t.exitDemoModalConfirm}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

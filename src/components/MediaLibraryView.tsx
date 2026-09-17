@@ -137,8 +137,8 @@ export default function MediaLibraryView({
       
       {/* Header Section */}
       <div>
-        <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Lampiran Berkas Bersama</h2>
-        <p className="text-sm text-stone-500">Folder terpadu penyimpan proposal katering, invoice pelunasan pelaminan, draf list tamu undangan pernikahan.</p>
+        <h2 className="text-2xl font-bold tracking-tight text-[#0D1C17]">Lampiran Berkas Bersama</h2>
+        <p className="text-sm text-[#788A82]">Folder terpadu penyimpan proposal katering, invoice pelunasan pelaminan, draf list tamu undangan pernikahan.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -152,19 +152,19 @@ export default function MediaLibraryView({
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-            className={`bg-white border-2 border-dashed rounded-xl p-6 text-center transition flex flex-col items-center justify-center space-y-3 cursor-pointer ${dragActive ? 'border-amber-700 bg-amber-50/15' : 'border-stone-200/80 hover:border-amber-700'}`}
+            className={`bg-white border-2 border-dashed rounded-2xl p-6 text-center transition flex flex-col items-center justify-center space-y-3 cursor-pointer ${dragActive ? 'border-[#1C3E33] bg-[#1C3E33]/5' : 'border-[#E8DDD9] hover:border-[#1C3E33]'}`}
           >
-            <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-amber-700 mx-auto">
+            <div className="w-12 h-12 rounded-full bg-[#FAF5F5] flex items-center justify-center text-[#1C3E33] mx-auto border border-[#E8DDD9]">
               <Upload className="w-6 h-6 stroke-1.5" />
             </div>
             <div>
-              <span className="text-xs font-bold text-stone-900 block">Jatuhkan Berkas di Sini</span>
-              <p className="text-[11px] text-zinc-500 mt-1">Dukung format: PDF, JPEG, PNG, XLSX, DOCX hingga 15MB</p>
+              <span className="text-xs font-bold text-[#0D1C17] block">Jatuhkan Berkas di Sini</span>
+              <p className="text-[11px] text-[#788A82] mt-1">Dukung format: PDF, JPEG, PNG, XLSX, DOCX hingga 15MB</p>
             </div>
             
-            <span className="text-stone-400 font-mono text-[10px]">ATAU</span>
+            <span className="text-[#788A82] font-mono text-[10px]">ATAU</span>
 
-            <form onSubmit={handleManualUpload} className="w-full space-y-2 text-left text-[11px] font-semibold text-stone-700">
+            <form onSubmit={handleManualUpload} className="w-full space-y-2 text-left text-[11px] font-semibold text-[#0D1C17]">
               <div>
                 <label className="block mb-0.5">Nama Berkas</label>
                 <input
@@ -173,7 +173,7 @@ export default function MediaLibraryView({
                   placeholder="pricelist-vendor-dekor"
                   value={fileName}
                   onChange={(e) => setFileName(e.target.value)}
-                  className="w-full p-2 border border-stone-200 rounded-lg text-[11px] bg-stone-50 focus:outline-none"
+                  className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-[11px] bg-[#FAF5F5] text-[#0D1C17] focus:outline-none focus:ring-2 focus:ring-[#1C3E33]/20 focus:border-[#1C3E33]"
                 />
               </div>
 
@@ -183,7 +183,7 @@ export default function MediaLibraryView({
                   <select
                     value={fileType}
                     onChange={(e) => setFileType(e.target.value as any)}
-                    className="w-full p-1.5 border border-stone-200 rounded-lg text-[11px] bg-white focus:outline-none"
+                    className="w-full p-2 border border-[#E8DDD9] rounded-xl text-[11px] bg-white focus:outline-none font-bold text-[#0D1C17]"
                   >
                     <option value="PDF">PDF Document</option>
                     <option value="Image">Gambar (PNG/JPG)</option>
@@ -196,7 +196,7 @@ export default function MediaLibraryView({
                   <select
                     value={fileArea}
                     onChange={(e) => setFileArea(e.target.value as any)}
-                    className="w-full p-1.5 border border-stone-200 rounded-lg text-[11px] bg-white focus:outline-none"
+                    className="w-full p-2 border border-[#E8DDD9] rounded-xl text-[11px] bg-white focus:outline-none font-bold text-[#0D1C17]"
                   >
                     <option value="Budget">Budget / Finansial</option>
                     <option value="Vendor">Vendor Jasa</option>
@@ -209,7 +209,7 @@ export default function MediaLibraryView({
 
               <button
                 type="submit"
-                className="w-full py-1.5 bg-amber-700 hover:bg-amber-800 text-[#FAF9F5] font-bold rounded-lg transition mt-1.5"
+                className="w-full py-2.5 bg-[#1C3E33] hover:bg-[#142F26] text-[#F7F1F0] font-bold rounded-xl transition mt-2 cursor-pointer border-0 shadow-xs"
               >
                 Unduh Berkas Ke Workspace
               </button>
@@ -217,20 +217,20 @@ export default function MediaLibraryView({
           </div>
 
           {/* Quick Stats folders counts */}
-          <div className="bg-white p-4 rounded-xl border border-stone-200/70 text-xs space-y-2.5">
-            <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest font-mono">Direktori Folder Aktif (Sektor)</span>
+          <div className="bg-white p-4 rounded-2xl border border-[#E8DDD9] text-xs space-y-2.5 shadow-xs">
+            <span className="text-[10px] font-bold text-[#788A82] uppercase tracking-widest font-mono">Direktori Folder Aktif (Sektor)</span>
             
-            <div className="space-y-1.5 font-medium text-stone-700">
+            <div className="space-y-1.5 font-medium text-[#2D3D36]">
               {['Budget', 'Vendor', 'Checklist', 'Rundown', 'Seserahan'].map(area => {
                 const count = attachments.filter(f => f.area === area).length;
                 return (
                   <button
                     key={area}
                     onClick={() => setFilterArea(area)}
-                    className={`w-full flex items-center justify-between p-1.5 rounded-lg transition ${filterArea === area ? 'bg-amber-100/40 font-bold' : 'hover:bg-amber-50/10'}`}
+                    className={`w-full flex items-center justify-between p-2 rounded-xl transition cursor-pointer border-0 ${filterArea === area ? 'bg-[#1C3E33]/10 font-bold text-[#1C3E33]' : 'hover:bg-[#FAF5F5] text-[#2D3D36]'}`}
                   >
-                    <span className="flex items-center"><Folder className="w-3.5 h-3.5 mr-1.5 text-amber-600" /> Folder {area}</span>
-                    <span className="bg-stone-100 text-stone-600 font-bold font-mono px-1.5 py-0.5 rounded text-[10px]">{count} Berkas</span>
+                    <span className="flex items-center"><Folder className="w-3.5 h-3.5 mr-2 text-[#1C3E33]" /> Folder {area}</span>
+                    <span className="bg-[#FAF5F5] border border-[#E8DDD9] text-[#788A82] font-bold font-mono px-2 py-0.5 rounded-full text-[10px]">{count} Berkas</span>
                   </button>
                 );
               })}
@@ -243,22 +243,22 @@ export default function MediaLibraryView({
         <div className="lg:col-span-2 space-y-4">
           
           {/* SEARCH & ACCENT FILTER CONTROL */}
-          <div className="bg-white p-4 rounded-xl border border-stone-200/70 shadow-xs flex flex-col md:flex-row gap-3">
+          <div className="bg-white p-4 rounded-xl border border-[#E8DDD9] shadow-xs flex flex-col md:flex-row gap-3">
             <div className="relative flex-grow">
-              <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-3" />
+              <Search className="w-4 h-4 text-[#788A82] absolute left-3 top-3" />
               <input
                 type="text"
                 placeholder="Cari draf file proposal katering, menu kwitansi..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-amber-500/10 focus:border-amber-600 bg-stone-50"
+                className="w-full pl-9 pr-4 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#1C3E33]/20 focus:border-[#1C3E33] bg-[#FAF5F5] text-[#0D1C17]"
               />
             </div>
 
             <select
               value={filterArea}
               onChange={(e) => setFilterArea(e.target.value)}
-              className="px-3 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-amber-600 bg-white cursor-pointer font-semibold text-zinc-700"
+              className="px-3 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:border-[#1C3E33] bg-white cursor-pointer font-bold text-[#0D1C17]"
             >
               <option value="ALL">Semua Folder Sektor</option>
               <option value="Budget">Budget</option>
@@ -271,8 +271,8 @@ export default function MediaLibraryView({
 
           {/* FILES CARD GRID */}
           {filteredAttachments.length === 0 ? (
-            <div className="bg-white rounded-xl border border-stone-200/60 p-12 text-center text-zinc-400 space-y-2">
-              <FolderHeart className="w-10 h-10 mx-auto stroke-1 text-zinc-300" />
+            <div className="bg-white rounded-2xl border border-[#E8DDD9] p-12 text-center text-[#788A82] space-y-2">
+              <FolderHeart className="w-10 h-10 mx-auto stroke-1 text-[#788A82]/50" />
               <p className="text-xs font-medium">Belum ada berkas terunggah di filter area ini.</p>
             </div>
           ) : (
@@ -280,20 +280,20 @@ export default function MediaLibraryView({
               {filteredAttachments.map((file) => (
                 <div 
                   key={file.id} 
-                  className="bg-white border border-stone-200/70 p-4 rounded-xl hover:shadow-md transition flex items-start justify-between gap-3"
+                  className="bg-white border border-[#E8DDD9] p-4 rounded-2xl hover:shadow-sm transition flex items-start justify-between gap-3 shadow-xs"
                 >
                   <div className="flex items-start space-x-3 truncate">
                     {getFileIcon(file.type)}
                     <div className="truncate space-y-1">
-                      <span className="font-bold text-stone-900 block text-xs truncate" title={file.name}>
+                      <span className="font-bold text-[#0D1C17] block text-xs truncate" title={file.name}>
                         {file.name}
                       </span>
-                      <div className="flex items-center space-x-2 text-[10px] text-zinc-400 font-mono font-medium">
-                        <span className="bg-amber-50 text-amber-805 text-amber-800 font-bold px-1.5 rounded py-0.2 uppercase select-none">{file.area}</span>
+                      <div className="flex items-center space-x-2 text-[10px] text-[#788A82] font-mono font-medium">
+                        <span className="bg-[#1C3E33]/10 text-[#1C3E33] font-bold px-2 rounded-full py-0.5 uppercase select-none">{file.area}</span>
                         <span>{file.size}</span>
                       </div>
-                      <p className="text-[10px] text-zinc-500">
-                        Diunggah oleh: <span className="font-semibold text-stone-800">{file.uploadedBy}</span>
+                      <p className="text-[10px] text-[#788A82]">
+                        Diunggah oleh: <span className="font-semibold text-[#0D1C17]">{file.uploadedBy}</span>
                       </p>
                     </div>
                   </div>
@@ -301,14 +301,14 @@ export default function MediaLibraryView({
                   <div className="flex items-center space-x-1 shrink-0">
                     <button
                       onClick={() => alert(`Simulasi mengunduh berkas "${file.name}" ke komputer Anda! 📥`)}
-                      className="p-1 px-1.5 text-zinc-500 hover:text-amber-800 rounded hover:bg-stone-50 transition"
+                      className="p-1.5 text-[#788A82] hover:text-[#1C3E33] rounded-lg hover:bg-[#FAF5F5] transition cursor-pointer border-0"
                       title="Download Berkas"
                     >
                       <Download className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => onDeleteAttachment(file.id)}
-                      className="p-1 px-1.5 text-zinc-450 hover:text-red-600 rounded hover:bg-red-50 transition"
+                      className="p-1.5 text-zinc-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition cursor-pointer border-0"
                       title="Hapus Berkas"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

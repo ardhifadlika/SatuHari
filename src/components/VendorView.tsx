@@ -21,6 +21,7 @@ import {
   PhoneCall
 } from 'lucide-react';
 import { VendorItem, VendorCategory, VendorStatus } from '../types';
+import { formatRupiah, formatNumberWithDots, parseRupiah } from '../utils/currency';
 
 interface VendorViewProps {
   vendors: VendorItem[];
@@ -126,12 +127,12 @@ export default function VendorView({
 
   const getStatusColor = (status: VendorStatus) => {
     switch (status) {
-      case 'Researching': return 'bg-zinc-100 text-stone-700';
-      case 'Contacted': return 'bg-blue-50 text-blue-800';
-      case 'Negotiating': return 'bg-amber-100/90 text-amber-900';
-      case 'Booked': return 'bg-emerald-50 text-emerald-800 border border-emerald-200/50';
-      case 'Completed': return 'bg-stone-900 text-stone-50';
-      default: return 'bg-stone-100 text-stone-700';
+      case 'Researching': return 'bg-stone-100 text-stone-700 border border-stone-200';
+      case 'Contacted': return 'bg-blue-50 text-blue-800 border border-blue-200';
+      case 'Negotiating': return 'bg-amber-50 text-amber-800 border border-amber-200';
+      case 'Booked': return 'bg-emerald-50 text-emerald-800 border border-emerald-200';
+      case 'Completed': return 'bg-[#1C3E33] text-[#F7F1F0] border border-[#1C3E33]';
+      default: return 'bg-stone-100 text-stone-700 border border-stone-200';
     }
   };
 
@@ -149,13 +150,13 @@ export default function VendorView({
       {/* Header Title Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Manajemen Vendor</h2>
-          <p className="text-sm text-stone-500">Kumpulkan penawaran harga, bandingkan kontrak vendor, dan hubungi langsung via WhatsApp.</p>
+          <h2 className="text-2xl font-bold tracking-tight text-[#0D1C17]">Manajemen Vendor</h2>
+          <p className="text-sm text-[#788A82]">Kumpulkan penawaran harga, bandingkan kontrak vendor, dan hubungi langsung via WhatsApp.</p>
         </div>
         <button
           id="btn-open-add-vendor-modal"
           onClick={() => setShowAddModal(true)}
-          className="px-4 py-2.5 bg-amber-700 hover:bg-amber-800 text-stone-50 rounded-lg text-sm font-semibold flex items-center shadow-md transition self-start md:self-auto cursor-pointer"
+          className="px-4 py-2.5 bg-[#1C3E33] hover:bg-[#142F26] text-[#F7F1F0] rounded-xl text-sm font-semibold flex items-center shadow-xs transition self-start md:self-auto cursor-pointer border-0"
         >
           <Plus className="w-4 h-4 mr-1.5" />
           Hubungkan Vendor Baru
@@ -163,19 +164,19 @@ export default function VendorView({
       </div>
 
       {/* FILTER PANEL */}
-      <div className="bg-white p-4 rounded-xl border border-stone-200/70 shadow-xs space-y-3">
+      <div className="bg-white p-4 rounded-xl border border-[#E8DDD9] shadow-xs space-y-3">
         <div className="flex flex-col md:flex-row gap-3">
           
           {/* Vendor Search */}
           <div className="relative flex-grow">
-            <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-[#788A82] absolute left-3 top-3" />
             <input
               id="search-vendors-input"
               type="text"
               placeholder="Cari vendor, penanggung jawab, catatan layanan..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-amber-500/10 focus:border-amber-600 bg-stone-50"
+              className="w-full pl-9 pr-4 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#1C3E33]/20 focus:border-[#1C3E33] bg-[#FAF5F5] text-[#0D1C17]"
             />
           </div>
 
@@ -184,7 +185,7 @@ export default function VendorView({
             id="filter-vendor-category"
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value as any)}
-            className="px-3 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-amber-600 bg-white cursor-pointer font-semibold text-stone-700"
+            className="px-3 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:border-[#1C3E33] bg-white cursor-pointer font-bold text-[#0D1C17]"
           >
             <option value="ALL">Semua Kategori Jasa</option>
             {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
@@ -195,7 +196,7 @@ export default function VendorView({
             id="filter-vendor-status"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value as any)}
-            className="px-3 py-2 border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-amber-600 bg-white cursor-pointer font-semibold text-stone-700"
+            className="px-3 py-2 border border-[#E8DDD9] rounded-xl text-xs focus:outline-none focus:border-[#1C3E33] bg-white cursor-pointer font-bold text-[#0D1C17]"
           >
             <option value="ALL">Semua Tahap Status</option>
             {statuses.map(st => <option key={st} value={st}>{st}</option>)}
@@ -206,27 +207,27 @@ export default function VendorView({
 
       {/* VENDOR ITEMS CARDS GRID */}
       {filteredVendors.length === 0 ? (
-        <div className="bg-white rounded-xl border border-stone-200/60 p-12 text-center max-w-xl mx-auto space-y-3">
-          <div className="w-12 h-12 rounded-full bg-stone-50 flex items-center justify-center mx-auto text-stone-400">
+        <div className="bg-white rounded-xl border border-[#E8DDD9] p-12 text-center max-w-xl mx-auto space-y-3">
+          <div className="w-12 h-12 rounded-full bg-[#FAF5F5] flex items-center justify-center mx-auto text-[#788A82]">
             <Building className="w-6 h-6 stroke-1" />
           </div>
-          <p className="text-sm font-semibold text-stone-700">"No vendors added. Let's find your dream team."</p>
-          <p className="text-xs text-stone-400">Kumpulkan referensi penata rias (MUA), sewa mobil pengantin (transport), katering utama, foto & video dokumentasi di sini.</p>
+          <p className="text-sm font-semibold text-[#0D1C17]">"No vendors added. Let's find your dream team."</p>
+          <p className="text-xs text-[#788A82]">Kumpulkan referensi penata rias (MUA), sewa mobil pengantin (transport), katering utama, foto & video dokumentasi di sini.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredVendors.map((vendor) => (
             <div 
               key={vendor.id}
-              className="bg-white border border-stone-200/80 rounded-xl p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between space-y-4"
+              className="bg-white border border-[#E8DDD9] rounded-2xl p-5 shadow-xs hover:shadow-sm transition flex flex-col justify-between space-y-4"
             >
               
               <div className="space-y-2.5">
                 {/* Header info */}
                 <div className="flex justify-between items-start gap-2">
                   <div>
-                    <span className="text-[10px] bg-amber-50 text-amber-800 font-extrabold px-1.5 py-0.5 rounded uppercase font-mono">{vendor.category}</span>
-                    <h3 className="text-sm font-bold text-stone-900 mt-1">{vendor.name}</h3>
+                    <span className="text-[10px] bg-[#1C3E33]/15 text-[#1C3E33] font-extrabold px-2 py-0.5 rounded-full uppercase font-mono">{vendor.category}</span>
+                    <h3 className="text-sm font-bold text-[#0D1C17] mt-1.5">{vendor.name}</h3>
                   </div>
                   
                   {/* Status Badges Selector */}
@@ -234,34 +235,34 @@ export default function VendorView({
                     id={`select-vendor-status-${vendor.id}`}
                     value={vendor.status}
                     onChange={(e) => onUpdateVendor(vendor.id, { status: e.target.value as VendorStatus })}
-                    className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold cursor-pointer focus:outline-none uppercase-label ${getStatusColor(vendor.status)}`}
+                    className={`px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold cursor-pointer focus:outline-none uppercase ${getStatusColor(vendor.status)}`}
                   >
                     <option value="Researching">Researching</option>
-                    <option value="Contacted">Contacted</option>
-                    <option value="Negotiating">Negotiating</option>
-                    <option value="Booked">Booked (Sewa)</option>
+                    <option value="Contacted">Contacted (Info)</option>
+                    <option value="Negotiating">Negotiating (Warn)</option>
+                    <option value="Booked">Booked (Success)</option>
                     <option value="Completed">Completed (Selesai)</option>
                   </select>
                 </div>
 
                 {/* Contact information */}
-                <div className="p-3 bg-stone-50 rounded-lg text-xs space-y-1.5 font-medium text-stone-700">
+                <div className="p-3 bg-[#FAF5F5] rounded-xl border border-[#E8DDD9] text-xs space-y-1.5 font-medium text-[#2D3D36]">
                   <p className="flex items-center justify-between">
-                    <span>Narahubung (CP):</span>
-                    <span className="font-bold text-stone-900">{vendor.contactPerson || '-'}</span>
+                    <span className="text-[#788A82]">Narahubung (CP):</span>
+                    <span className="font-bold text-[#0D1C17]">{vendor.contactPerson || '-'}</span>
                   </p>
                   <p className="flex items-center justify-between">
-                    <span>No. HP / Kontak:</span>
-                    <span className="font-mono">{vendor.phoneNumber}</span>
+                    <span className="text-[#788A82]">No. HP / Kontak:</span>
+                    <span className="font-mono text-[#0D1C17]">{vendor.phoneNumber}</span>
                   </p>
                   
-                  <div className="pt-2 border-t border-stone-200 flex justify-end">
+                  <div className="pt-2 border-t border-[#E8DDD9] flex justify-end">
                     <a
                       id={`link-wa-chat-${vendor.id}`}
                       href={getWhatsAppLink(vendor.phoneNumber, vendor.name)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-stone-50 font-bold rounded text-[10px] flex items-center transition"
+                      className="px-2.5 py-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg text-[10px] flex items-center transition shadow-2xs"
                     >
                       <MessageSquare className="w-3.5 h-3.5 mr-1" />
                       Chat WhatsApp
@@ -270,14 +271,14 @@ export default function VendorView({
                 </div>
 
                 {/* Docs, Offers, Contract Checklist */}
-                <div className="text-xs space-y-1.5 font-semibold text-stone-600">
-                  <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest block font-mono">Kelengkapan Administrasi</span>
+                <div className="text-xs space-y-1.5 font-semibold text-[#2D3D36]">
+                  <span className="text-[10px] font-bold text-[#788A82] uppercase tracking-widest block font-mono">Kelengkapan Administrasi</span>
                   
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center">
-                      <FileCheck className="w-3.5 h-3.5 text-zinc-400 mr-1.5" /> Penawaran Harga (Quotation)
+                      <FileCheck className="w-3.5 h-3.5 text-[#788A82] mr-1.5" /> Penawaran Harga (Quotation)
                     </span>
-                    <div className="flex items-center space-x-1">
+                    <div className="flex items-center space-x-1.5">
                       <input
                         id={`check-quote-${vendor.id}`}
                         type="checkbox"
@@ -288,15 +289,15 @@ export default function VendorView({
                             status: e.target.checked ? 'Received' : 'None'
                           }
                         })}
-                        className="rounded border-zinc-300 focus:ring-amber-500 h-3.5 w-3.5 cursor-pointer text-amber-700"
+                        className="rounded border-[#E8DDD9] accent-[#1C3E33] h-3.5 w-3.5 cursor-pointer"
                       />
-                      <span className="text-[10px] font-mono text-zinc-500 font-bold">Rp {vendor.quotation.amount ? vendor.quotation.amount.toLocaleString('id-ID') : '0'}</span>
+                      <span className="text-[10px] font-mono text-[#788A82] font-bold">{formatRupiah(vendor.quotation.amount || 0)}</span>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center">
-                      <CheckCircle className="w-3.5 h-3.5 text-zinc-400 mr-1.5" /> Draf Kontrak (Signed MOU)
+                      <CheckCircle className="w-3.5 h-3.5 text-[#788A82] mr-1.5" /> Draf Kontrak (Signed MOU)
                     </span>
                     <input
                       id={`check-contract-${vendor.id}`}
@@ -308,31 +309,31 @@ export default function VendorView({
                           status: e.target.checked ? 'Received' : 'None'
                         }
                       })}
-                      className="rounded border-zinc-300 focus:ring-amber-500 h-3.5 w-3.5 cursor-pointer text-amber-700"
+                      className="rounded border-[#E8DDD9] accent-[#1C3E33] h-3.5 w-3.5 cursor-pointer"
                     />
                   </div>
                 </div>
 
                 {vendor.paymentSchedule && (
-                  <div className="text-xs p-2.5 bg-amber-55 bg-amber-50/50 rounded-lg border border-amber-100 font-mono text-amber-950">
-                    <span className="text-[9px] uppercase font-extrabold text-amber-900 block tracking-wide">Rencana Jadwal Pembayaran:</span>
-                    <p className="text-[11px] font-medium leading-relaxed mt-0.5">{vendor.paymentSchedule}</p>
+                  <div className="text-xs p-2.5 bg-[#FAF5F5] rounded-xl border border-[#E8DDD9] font-mono text-[#0D1C17]">
+                    <span className="text-[9px] uppercase font-extrabold text-[#1C3E33] block tracking-wide">Rencana Jadwal Pembayaran:</span>
+                    <p className="text-[11px] font-medium leading-relaxed mt-0.5 text-[#2D3D36]">{vendor.paymentSchedule}</p>
                   </div>
                 )}
 
                 {vendor.notes && (
-                  <div className="text-xs text-stone-500 italic mt-1 line-clamp-2">
+                  <div className="text-xs text-[#788A82] italic mt-1 line-clamp-2">
                     Catatan: {vendor.notes}
                   </div>
                 )}
               </div>
 
               {/* Card Footer Delete Button */}
-              <div className="pt-3 border-t border-stone-100 flex justify-end text-xs font-mono">
+              <div className="pt-3 border-t border-[#E8DDD9]/60 flex justify-end text-xs font-mono">
                 <button
                   id={`btn-delete-vendor-${vendor.id}`}
                   onClick={() => onDeleteVendor(vendor.id)}
-                  className="p-1 px-2 text-zinc-400 hover:text-red-650 hover:bg-neutral-50 rounded text-[11px] font-medium flex items-center transition"
+                  className="p-1 px-2 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-lg text-[11px] font-medium flex items-center transition cursor-pointer border-0"
                 >
                   <Trash2 className="w-3.5 h-3.5 mr-1" />
                   Hapus Vendor
@@ -346,12 +347,12 @@ export default function VendorView({
 
       {/* ADD VENDOR MODAL */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 border border-stone-200">
-            <h3 className="text-lg font-bold text-stone-900 mb-1">Hubungkan Vendor Baru</h3>
-            <p className="text-xs text-stone-500 mb-4">Sajikan rincian kontak agar mudah ditindaklanjuti sesama pasangan.</p>
+        <div className="fixed inset-0 bg-[#0D1C17]/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl shadow-xl w-full max-w-md p-6 border border-[#E8DDD9] relative overflow-hidden">
+            <h3 className="text-lg font-bold text-[#0D1C17] mb-1">Hubungkan Vendor Baru</h3>
+            <p className="text-xs text-[#788A82] mb-4">Sajikan rincian kontak agar mudah ditindaklanjuti sesama pasangan.</p>
 
-            <form onSubmit={handleCreateVendor} className="space-y-3 text-xs font-semibold text-stone-700">
+            <form onSubmit={handleCreateVendor} className="space-y-3 text-xs font-semibold text-[#0D1C17]">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block mb-1">Nama Vendor / Penyedia *</label>
@@ -361,7 +362,7 @@ export default function VendorView({
                     placeholder="Contoh: Artea Florist..."
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none focus:ring-2 focus:ring-[#1C3E33]/20 focus:border-[#1C3E33]"
                   />
                 </div>
                 <div>
@@ -369,7 +370,7 @@ export default function VendorView({
                   <select
                     value={newCat}
                     onChange={(e) => setNewCat(e.target.value as VendorCategory)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-white focus:outline-none font-medium"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-white focus:outline-none font-bold text-[#0D1C17]"
                   >
                     {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                   </select>
@@ -384,7 +385,7 @@ export default function VendorView({
                     placeholder="Contoh: Mbak Nia"
                     value={newCP}
                     onChange={(e) => setNewCP(e.target.value)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none"
                   />
                 </div>
                 <div>
@@ -395,30 +396,34 @@ export default function VendorView({
                     placeholder="Contoh: 0812XXXXXXXX"
                     value={newPhone}
                     onChange={(e) => setNewPhone(e.target.value)}
-                    className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none font-mono"
+                    className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none font-mono"
                   />
                 </div>
               </div>
 
-              <div className="p-3 bg-stone-50 rounded-xl space-y-3.5 border border-stone-150">
-                <span className="text-[9px] uppercase font-bold text-stone-400 tracking-wider">Tahap Quotation & Kontrak</span>
+              <div className="p-3.5 bg-[#FAF5F5] rounded-2xl space-y-3.5 border border-[#E8DDD9]">
+                <span className="text-[9px] uppercase font-bold text-[#788A82] tracking-wider block font-mono">Tahap Quotation & Kontrak</span>
                 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block mb-1 font-semibold text-stone-700">Estimasi Nilai Kontrak (Rp)</label>
-                    <input
-                      type="number"
-                      value={newQuoteAmt}
-                      onChange={(e) => setNewQuoteAmt(parseInt(e.target.value) || 0)}
-                      className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-white focus:outline-none"
-                    />
+                    <label className="block mb-1 font-semibold text-[#0D1C17]">Estimasi Nilai Kontrak</label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-2.5 text-xs text-[#788A82] font-mono font-bold">Rp</span>
+                      <input
+                        type="text"
+                        placeholder="0"
+                        value={formatNumberWithDots(newQuoteAmt)}
+                        onChange={(e) => setNewQuoteAmt(parseRupiah(e.target.value))}
+                        className="w-full pl-9 pr-3 py-2 border border-[#E8DDD9] rounded-xl text-xs bg-white focus:outline-none font-mono font-bold text-right"
+                      />
+                    </div>
                   </div>
                   <div>
-                    <label className="block mb-1 font-semibold text-stone-750">Tahap Status Awal</label>
+                    <label className="block mb-1 font-semibold text-[#0D1C17]">Tahap Status Awal</label>
                     <select
                       value={newStatus}
                       onChange={(e) => setNewStatus(e.target.value as VendorStatus)}
-                      className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-white focus:outline-none"
+                      className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-white focus:outline-none font-bold text-[#0D1C17]"
                     >
                       <option value="Researching">Meneliti (Researching)</option>
                       <option value="Contacted">Telah Hubungi (Contacted)</option>
@@ -429,23 +434,23 @@ export default function VendorView({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 text-xxs flex items-center justify-between font-medium">
-                  <label className="flex items-center space-x-1.5 cursor-pointer text-stone-600">
+                <div className="grid grid-cols-2 gap-3 text-xs flex items-center justify-between font-medium">
+                  <label className="flex items-center space-x-2 cursor-pointer text-[#2D3D36]">
                     <input
                       type="checkbox"
                       checked={newQuoteStatus === 'Received'}
                       onChange={(e) => setNewQuoteStatus(e.target.checked ? 'Received' : 'None')}
-                      className="rounded border-zinc-350"
+                      className="rounded border-[#E8DDD9] accent-[#1C3E33]"
                     />
                     <span>Quotation Diterima</span>
                   </label>
 
-                  <label className="flex items-center space-x-1.5 cursor-pointer text-stone-600">
+                  <label className="flex items-center space-x-2 cursor-pointer text-[#2D3D36]">
                     <input
                       type="checkbox"
                       checked={newContractStatus === 'Received'}
                       onChange={(e) => setNewContractStatus(e.target.checked ? 'Received' : 'None')}
-                      className="rounded border-zinc-350"
+                      className="rounded border-[#E8DDD9] accent-[#1C3E33]"
                     />
                     <span>Kontrak Disepakati</span>
                   </label>
@@ -459,7 +464,7 @@ export default function VendorView({
                   placeholder="Contoh: DP 50%, Pelunasan H-14 acara..."
                   value={newSchedule}
                   onChange={(e) => setNewSchedule(e.target.value)}
-                  className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none"
+                  className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none"
                 />
               </div>
 
@@ -470,22 +475,22 @@ export default function VendorView({
                   placeholder="Biaya charge pawang hujan, include panggung dll..."
                   value={newNotes}
                   onChange={(e) => setNewNotes(e.target.value)}
-                  className="w-full p-2 border border-zinc-200 rounded-lg text-xs bg-stone-50 focus:outline-none font-medium"
+                  className="w-full p-2.5 border border-[#E8DDD9] rounded-xl text-xs bg-[#FAF5F5] focus:outline-none font-medium"
                 />
               </div>
 
-              <div className="flex space-x-2 pt-4 border-t border-zinc-100 text-xs font-semibold">
+              <div className="flex space-x-2 pt-4 border-t border-[#E8DDD9] text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="flex-1 py-1.5 border border-zinc-200 hover:bg-stone-50 rounded-lg text-stone-600 transition"
+                  className="flex-1 py-2.5 border border-[#E8DDD9] hover:bg-[#FAF5F5] rounded-xl text-[#0D1C17] transition cursor-pointer bg-white"
                 >
                   Kembali
                 </button>
                 <button
                   id="btn-confirm-add-vendor"
                   type="submit"
-                  className="flex-1 py-1.5 bg-amber-700 hover:bg-amber-800 text-white rounded-lg transition"
+                  className="flex-1 py-2.5 bg-[#1C3E33] hover:bg-[#142F26] text-[#F7F1F0] rounded-xl transition cursor-pointer border-0 shadow-xs"
                 >
                   Simpan Vendor
                 </button>
